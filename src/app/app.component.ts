@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   maxPrice: any;
   minPrice: any;
   priceInterval: any[] = [];
-  chartOptionGrouped: any[] = [];
+  chartOptionGrouped: EChartOption[] = new Array();
 
   constructor(private http: HttpClient, private changeDetectorRef:ChangeDetectorRef) { }
 
@@ -106,7 +106,9 @@ export class AppComponent implements OnInit{
         });
       }
       // console.log(this.coinsTrending.coins.length);
-      console.log(this.chartOptionGrouped);
+      let group = this.chartOptionGrouped;
+      console.dir(this.chartOptionGrouped);
+      // console.log();
       for(let i=0; i<this.coinsTrending.coins.length; i++){
         console.log(i);
         let searchterm = this.coinsTrending.coins[i].item.id;
