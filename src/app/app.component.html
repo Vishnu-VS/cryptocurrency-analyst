@@ -13,8 +13,15 @@
             <mat-card-title>{{coins.item.name}}</mat-card-title>
             <mat-card-subtitle>{{coins.item.symbol}}</mat-card-subtitle>
           </mat-card-header>
+          <div class="demo-chart">
+          </div>
         </mat-card>
       </div>
     </div>
+  </div>
+  <div>
+    <mat-card>
+      <div echarts [options]="chartOption" class="demo-chart"></div>
+    </mat-card>
   </div>
 </div>
