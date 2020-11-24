@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   maxPrice: any;
   minPrice: any;
   priceInterval: any[] = [];
-  chartOptionGrouped: EChartOption[] = new Array();
+  chartOptionGrouped: EChartOption[] = [{},{},{},{},{},{},{}];
 
   constructor(private http: HttpClient, private changeDetectorRef:ChangeDetectorRef) { }
 
@@ -99,9 +99,9 @@ export class AppComponent implements OnInit{
             showSymbol: false,
             hoverAnimation: false,
           },
-        ],
+        ]
       }
-        this.chartOptionGrouped.push(this.chartOption);
+        this.chartOptionGrouped[i] = this.chartOption;
         this.prices = [];
         });
       }
