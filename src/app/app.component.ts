@@ -17,7 +17,8 @@ export class AppComponent implements OnInit{
   maxPrice: any;
   minPrice: any;
   priceInterval: any[] = [];
-  chartOptionGrouped: EChartOption[] = [{},{},{},{},{},{},{}];
+  chartOptionGrouped: any[] = [];
+
 
   constructor(private http: HttpClient, private changeDetectorRef:ChangeDetectorRef) { }
 
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(){
+    var array = [];
     // this.http.get('https://api.coingecko.com/api/v3/ping').subscribe((res)=>{
     //   //console.log(res);
     // });
@@ -49,6 +51,7 @@ export class AppComponent implements OnInit{
           let minPrice: any;
           // console.log(this.marketchart.value);
         //this.marketchart = res;
+
       for(let j=0; j<marketchart.prices.length; j++){
         if(j==0){
           maxPrice=marketchart.prices[j][1];
@@ -101,33 +104,35 @@ export class AppComponent implements OnInit{
           },
         ]
       }
-        this.chartOptionGrouped[i] = this.chartOption;
+        array.push(this.chartOption);
         this.prices = [];
         });
       }
       // console.log(this.coinsTrending.coins.length);
-      let group = this.chartOptionGrouped;
-      console.dir(this.chartOptionGrouped);
+      this.chartOptionGrouped = array;
+      console.log(array);
+      console.log(this.chartOptionGrouped);
+      // console.dir(this.chartOptionGrouped);
       // console.log();
-      for(let i=0; i<this.coinsTrending.coins.length; i++){
-        console.log(i);
-        let searchterm = this.coinsTrending.coins[i].item.id;
-        console.log(searchterm);
-        for(let j=0; j<this.coinsTrending.coins.length; j++){
-          let tempstorage;
-          console.log(this.chartOptionGrouped[j]);
-          console.log(searchterm);
-          if(this.chartOptionGrouped[j].title.text == searchterm){
-            console.log("match");
-            console.log("i="+i+"j="+j);
-            if(i!=j){
-              tempstorage = this.chartOptionGrouped[i];
-              this.chartOptionGrouped[i] = this.chartOptionGrouped[j];
-              this.chartOptionGrouped[j] = tempstorage;
-            }
-          }
-        }
-      }
+      // for(let i=0; i<this.coinsTrending.coins.length; i++){
+      //   console.log(i);
+      //   let searchterm = this.coinsTrending.coins[i].item.id;
+      //   console.log(searchterm);
+      //   for(let j=0; j<this.coinsTrending.coins.length; j++){
+      //     let tempstorage;
+      //     console.log(this.chartOptionGrouped[j]);
+      //     console.log(searchterm);
+      //     if(this.chartOptionGrouped[j].title.text == searchterm){
+      //       console.log("match");
+      //       console.log("i="+i+"j="+j);
+      //       if(i!=j){
+      //         tempstorage = this.chartOptionGrouped[i];
+      //         this.chartOptionGrouped[i] = this.chartOptionGrouped[j];
+      //         this.chartOptionGrouped[j] = tempstorage;
+      //       }
+      //     }
+      //   }
+      // }
       console.log(this.chartOptionGrouped);
     });
   //   this.http.get("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily").subscribe((res)=>{
