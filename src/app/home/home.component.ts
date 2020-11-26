@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EChartOption } from 'echarts';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,41 @@ export class HomeComponent implements OnInit {
   minPrice: any;
   chartOptionGrouped: any[] = [];
   marketchartPrices: any[] = [];
+  config: SwiperConfigInterface = {
+    // a11y: true,
+    direction: 'horizontal',
+    slidesPerView: 4,
+    slidesPerGroup: 2,
+    // slideToClickedSlide: true,
+    mousewheel: true,
+    scrollbar: false,
+    // watchSlidesProgress: true,
+    navigation: true,
+    keyboard: true,
+    pagination: false,
+    // centeredSlides: true,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    // roundLengths: true,
+    // slidesOffsetBefore: 100,
+    // slidesOffsetAfter: 100,
+    // spaceBetween: 10,
+    breakpoints: {
+        // when window width is >= 320px
+        320: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+        },
+        768:{
+          slidesPerView: 2,
+          slidesPerGroup: 2,
+        },
+        1024:{
+          slidesPerView: 4,
+          slidesPerGroup: 2,
+        }
+    }
+};
 
   constructor(
     private http: HttpClient,
@@ -32,7 +68,7 @@ export class HomeComponent implements OnInit {
   }
 
   async getMarketChart(coins) {
-    console.log(coins);
+    // console.log(coins);
     for (let i = 0; i < coins.length; i++) {
       var marketcharttemp = await this.marketChartApi(coins[i].item.id);
       // console.log(i);
@@ -56,14 +92,14 @@ export class HomeComponent implements OnInit {
         //this.prices.push(marketchart.prices[j][1]);
         this.marketchartPrices.push(marketchart.prices[j][1]);
       }
-      console.log(this.marketchartPrices);
+      // console.log(this.marketchartPrices);
       // console.log(maxPrice);
       // console.log(minPrice);
       this.chartOption = {
-        title: {
-          text: this.coinsTrending.coins[i].item.id,
-          show: true,
-        },
+        // title: {
+        //   text: this.coinsTrending.coins[i].item.id,
+        //   show: true,
+        // },
         xAxis: {
           type: 'category',
           splitLine: {
@@ -94,7 +130,7 @@ export class HomeComponent implements OnInit {
       this.chartOptionGrouped.push(this.chartOption);
       this.marketchartPrices = [];
     }
-    console.log(this.chartOptionGrouped);
+    // console.log(this.chartOptionGrouped);
   }
 
   ngOnInit(): void {
@@ -103,6 +139,7 @@ export class HomeComponent implements OnInit {
       .subscribe((res) => {
         this.coinsTrending = res;
         // console.log(this.coinsTrending.coins);
+        this.changeDetectorRef.detectChanges();
         this.getMarketChart(this.coinsTrending.coins);
       });
   }
