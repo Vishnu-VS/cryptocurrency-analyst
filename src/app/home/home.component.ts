@@ -36,21 +36,21 @@ export class HomeComponent implements OnInit {
     // slidesOffsetAfter: 100,
     // spaceBetween: 10,
     breakpoints: {
-        // when window width is >= 320px
-        320: {
-            slidesPerView: 1,
-            slidesPerGroup: 1,
-        },
-        768:{
-          slidesPerView: 2,
-          slidesPerGroup: 2,
-        },
-        1024:{
-          slidesPerView: 4,
-          slidesPerGroup: 2,
-        }
-    }
-};
+      // when window width is >= 320px
+      320: {
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+      },
+      768: {
+        slidesPerView: 2,
+        slidesPerGroup: 2,
+      },
+      1024: {
+        slidesPerView: 4,
+        slidesPerGroup: 2,
+      },
+    },
+  };
 
   constructor(
     private http: HttpClient,

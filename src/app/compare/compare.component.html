@@ -1,0 +1,7 @@
+<mat-form-field appearance="fill">
+  <mat-label>Currency</mat-label>
+  <mat-select value="USD">
+    <mat-option></mat-option>
+    <mat-option [value]="option" *ngFor="let option of supportedCurrencies">{{ option }}</mat-option>
+  </mat-select>
+</mat-form-field>
