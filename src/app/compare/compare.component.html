@@ -1,7 +1,23 @@
-<mat-form-field appearance="fill">
-  <mat-label>Currency</mat-label>
-  <mat-select value="USD">
-    <mat-option></mat-option>
-    <mat-option [value]="option" *ngFor="let option of supportedCurrencies">{{ option }}</mat-option>
-  </mat-select>
-</mat-form-field>
+<form class="example-form">
+  <mat-form-field *ngIf="supportedCurrencies" appearance="fill" style="display: block;">
+    <mat-label>Currency</mat-label>
+    <mat-select value="USD">
+      <mat-option></mat-option>
+      <mat-option [value]="option" *ngFor="let option of supportedCurrencies">{{ option }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="options" class="example-full-width" appearance="fill" style="display: block;">
+    <mat-label id="selectCoin">Select Coin</mat-label>
+    <input type="text"
+           aria-label="selectCoin"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+

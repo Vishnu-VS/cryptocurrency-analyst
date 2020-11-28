@@ -11,6 +11,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 import { SwiperModule } from 'ngx-swiper-wrapper';
@@ -41,7 +43,9 @@ import { CompareComponent } from './compare/compare.component';
     MatCardModule,
     MatDividerModule,
     MatFormFieldModule,
+    MatInputModule,
     MatSelectModule,
+    MatAutocompleteModule,
     NgxEchartsModule.forRoot({
       /**
        * This will import all modules from echarts.
