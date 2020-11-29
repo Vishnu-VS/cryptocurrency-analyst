@@ -1,39 +1,32 @@
-<div style="padding-left: 50px; padding-right: 50px; padding-top: 50px">
+<div class="container" id="startContent">
   <div>
     <h1>Trending crypto coins</h1>
     <mat-divider></mat-divider>
   </div>
   <div>
-    <div>
-      <swiper *ngIf="coinsTrending" [config]="config">
-        <mat-card
-          class="example-card"
-          *ngFor="let coins of coinsTrending.coins; let i = index"
-        >
-          <mat-card-header>
-            <div
-              mat-card-avatar
-              class="example-header-image"
-              style="background-image: url('{{ coins.item.large }}');
-            background-size: cover;"
-            ></div>
-            <mat-card-title>{{ coins.item.name }}</mat-card-title>
-            <mat-card-subtitle>{{ coins.item.symbol }}</mat-card-subtitle>
-          </mat-card-header>
+    <div class="trending-container" *ngIf="coinsTrending">
+      <mat-card
+        class="example-card"
+        *ngFor="let coins of coinsTrending.coins; let i = index"
+      >
+        <mat-card-header>
           <div
-            echarts
-            [options]="chartOptionGrouped[i]"
-            class="demo-chart"
+            mat-card-avatar
+            class="example-header-image"
+            style="background-image: url('{{ coins.item.large }}');
+            background-size: cover;"
           ></div>
-        </mat-card>
-      </swiper>
+          <mat-card-title>{{ coins.item.name }}</mat-card-title>
+          <mat-card-subtitle style="margin-bottom: 0">{{
+            coins.item.symbol
+          }}</mat-card-subtitle>
+          <div class="right-number" [matBadge]="i + 1"></div>
+        </mat-card-header>
+        <div echarts [options]="chartOptionGrouped[i]" class="demo-chart"></div>
+      </mat-card>
     </div>
   </div>
   <div>
-    <div>
-      <h1>Cryptocurrencies</h1>
-      <mat-divider></mat-divider>
-    </div>
     <app-compare></app-compare>
   </div>
 </div>

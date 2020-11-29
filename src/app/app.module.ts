@@ -5,35 +5,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {MatCardModule} from '@angular/material/card';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NgxEchartsModule } from 'ngx-echarts';
-import { SwiperModule } from 'ngx-swiper-wrapper';
-import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
-import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
-
-const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
-  direction: 'horizontal',
-  slidesPerView: 'auto'
-};
 
 import { HomeComponent } from './home/home.component';
 import { CompareComponent } from './compare/compare.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    CompareComponent
-  ],
+  declarations: [AppComponent, HomeComponent, CompareComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -48,6 +38,8 @@ import { CompareComponent } from './compare/compare.component';
     MatSelectModule,
     MatAutocompleteModule,
     MatButtonModule,
+    MatBadgeModule,
+    MatToolbarModule,
     NgxEchartsModule.forRoot({
       /**
        * This will import all modules from echarts.
@@ -56,14 +48,8 @@ import { CompareComponent } from './compare/compare.component';
        */
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
     }),
-    SwiperModule
   ],
-  providers: [
-    {
-      provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-    }
-  ],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,3 +1,13 @@
 .demo-chart {
   height: 500px;
 }
+
+.form-field {
+  width: 200px;
+}
+
+.fetch-price-form {
+  padding-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}

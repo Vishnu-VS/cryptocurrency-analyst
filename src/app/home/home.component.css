@@ -1,11 +1,31 @@
+.container {
+  padding: 50px;
+}
+@media screen and (max-width: 768px) {
+  .container {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
 .example-card {
-  max-width: 400px;
+  width: 250px;
   margin: 10px;
+  flex-grow: 1;
 }
 .demo-chart {
-  height: 200px;
+  height: 150px;
 }
 
-.swiper-slide-div{
-  height: 100px;
+.trending-container {
+  display: flex;
+  overflow-y: auto;
+  align-items: center;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+.right-number {
+  position: absolute;
+  right: 20px;
 }

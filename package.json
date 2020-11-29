@@ -23,7 +23,6 @@
     "@angular/router": "~11.0.1",
     "echarts": "^4.9.0",
     "ngx-echarts": "^5.2.1",
-    "ngx-swiper-wrapper": "^10.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
