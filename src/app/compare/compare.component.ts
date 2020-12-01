@@ -72,6 +72,7 @@ export class CompareComponent implements OnInit {
         this.marketchartDate.push(formattedDate);
       }
       this.chartSeriesData.push({
+        name: marketChartParams[i].id,
         data: this.marketchartPrices,
         type: 'line',
         animationEasing: 'linear',
