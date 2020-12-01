@@ -5,17 +5,13 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { MarketChartParameters } from '../market-chart-parameters';
+import { CoinGeckoApiService } from '../coin-gecko-api.service';
 
 export interface Coins {
   id: string;
   name: string;
   symbol: string;
-}
-
-export interface MarketChartParameters {
-  id: string;
-  vs_currency: string;
-  days: string;
 }
 
 @Component({
@@ -42,28 +38,16 @@ export class CompareComponent implements OnInit {
     selectedCoin: new FormControl(''),
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cgApi: CoinGeckoApiService) {}
 
   marketChartApi(marketChartParams: MarketChartParameters) {
-    return this.http
-      .get(
-        'https://api.coingecko.com/api/v3/coins/' +
-          marketChartParams.id +
-          '/market_chart?vs_currency=' +
-          marketChartParams.vs_currency +
-          '&days=' +
-          marketChartParams.days +
-          '&interval=daily'
-      )
+    return this.cgApi.marketChart(marketChartParams)
       .toPromise();
   }
 
   async getMarketChart(marketChartParams: MarketChartParameters[]) {
-    // console.log(coins);
     for (let i = 0; i < marketChartParams.length; i++) {
       var marketcharttemp = await this.marketChartApi(marketChartParams[i]);
-      // console.log(i);
-      // console.log(marketcharttemp);
       let marketchart: any = marketcharttemp;
       let maxPrice: any;
       let minPrice: any;
@@ -82,28 +66,11 @@ export class CompareComponent implements OnInit {
             minPrice = marketchart.prices[j][1];
           }
         }
-        //this.prices.push(marketchart.prices[j][1]);
         this.marketchartPrices.push(marketchart.prices[j][1]);
         date = new Date(marketchart.prices[j][0]);
         formattedDate = pipe.transform(date, 'shortDate');
         this.marketchartDate.push(formattedDate);
       }
-      // console.log(this.marketchartPrices);
-      // console.log(maxPrice);
-      // console.log(minPrice);
-      // if(i == 0){
-
-      // }
-      // else{
-      //   this.chartOption.series.push({
-      //     data: this.marketchartPrices,
-      //     type: 'line',
-      //     animationEasing: 'linear',
-      //     animationDuration: 1000,
-      //     showSymbol: true,
-      //     hoverAnimation: true,
-      //   });
-      // }
       this.chartSeriesData.push({
         data: this.marketchartPrices,
         type: 'line',
@@ -114,10 +81,6 @@ export class CompareComponent implements OnInit {
       });
       if (i == marketChartParams.length - 1) {
         this.chartOption = {
-          // title: {
-          //   text: this.coinsTrending.coins[i].item.id,
-          //   show: true,
-          // },
           dataZoom: [
             {
               type: 'inside',
@@ -150,8 +113,6 @@ export class CompareComponent implements OnInit {
           yAxis: {
             show: true,
             type: 'value',
-            // min: minPrice,
-            // max: maxPrice,
             splitLine: {
               show: true,
             },
@@ -162,7 +123,6 @@ export class CompareComponent implements OnInit {
           series: this.chartSeriesData,
         };
       }
-      //this.chartOptionGrouped.push(this.chartOption);
       this.marketchartPrices = [];
       this.marketchartDate = [];
     }
@@ -181,14 +141,6 @@ export class CompareComponent implements OnInit {
         days: this.selectedDays.value,
       },
     ];
-    // this.http
-    //     .get(
-    //       'https://api.coingecko.com/api/v3/coins/' +
-    //       this.selectedCoin.value +
-    //         '/market_chart?vs_currency='+this.selectedCurrency.value+'&days='+this.selectedDays.value+'&interval=daily'
-    //     ).subscribe(res => {
-    //       console.log(res);
-    //     });
     this.getMarketChart(this.marketChartParams);
   }
 
@@ -214,12 +166,10 @@ export class CompareComponent implements OnInit {
             i
           ].toUpperCase();
         }
-        // console.log(this.supportedCurrencies);
       });
     this.http
       .get('https://api.coingecko.com/api/v3/coins/list')
       .subscribe((res) => {
-        // console.log(res);
         this.options = <Coins[]>res;
       });
     this.filteredOptions = this.selectedCoin.valueChanges.pipe(
