@@ -9,10 +9,11 @@
     padding-bottom: 50px;
   }
 }
-.example-card {
+.trending-card {
   width: 250px;
   margin: 10px;
   flex-grow: 1;
+  padding-bottom: 0;
 }
 .demo-chart {
   height: 150px;

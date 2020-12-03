@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { EChartOption } from 'echarts';
 import { MarketChartParameters } from '../market-chart-parameters';
 import { CoinGeckoApiService } from '../coin-gecko-api.service';
+import { graphic } from 'echarts';
 
 @Component({
   selector: 'app-home',
@@ -77,6 +78,19 @@ export class HomeComponent implements OnInit {
           {
             data: this.marketchartPrices,
             type: 'line',
+            smooth: true,
+            itemStyle: {
+              color: '#673ab7'
+          },
+          areaStyle: {
+              color: new graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: '#b397e6'
+              }, {
+                  offset: 1,
+                  color: '#673ab7'
+              }])
+          },
             animationEasing: 'linear',
             animationDuration: 1000,
             showSymbol: false,
