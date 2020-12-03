@@ -33,6 +33,7 @@ export class CompareComponent implements OnInit {
   marketchartPrices: any[] = [];
   marketchartDate: any[] = [];
   chartSeriesData: any[] = [];
+  buttonText: string;
   heading: string;
   fetchCoinData = new FormGroup({
     selectedCoin: new FormControl(''),
@@ -128,7 +129,8 @@ export class CompareComponent implements OnInit {
       this.marketchartDate = [];
     }
     console.log(this.chartOption);
-    this.heading = 'Cryptocurrency Prices- Add another to compare';
+    this.heading = 'Add another to compare';
+    this.buttonText = 'Compare';
   }
 
   fetchCoinPrice() {
@@ -157,7 +159,8 @@ export class CompareComponent implements OnInit {
 
   ngOnInit(): void {
     this.heading =
-      'Cryptocurrency Prices - Select cryptocurrency to view prices';
+      'Select cryptocurrency to view prices';
+      this.buttonText = "View Prices";
     this.http
       .get('https://api.coingecko.com/api/v3/simple/supported_vs_currencies')
       .subscribe((res) => {

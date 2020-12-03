@@ -1,17 +1,10 @@
 <div style="padding-top: 50px" id="compareCoins">
-  <h1>{{ heading }}</h1>
-  <mat-divider></mat-divider>
+  <h1></h1>
 </div>
+<mat-card>
+  <mat-card-title>Cryptocurrency Prices</mat-card-title>
+  <mat-card-subtitle>{{ heading }}</mat-card-subtitle>
 <form class="fetch-price-form" (ngSubmit)="fetchCoinPrice()">
-  <mat-form-field *ngIf="supportedCurrencies" class="form-field">
-    <mat-label>Currency</mat-label>
-    <mat-select value="USD" [formControl]="selectedCurrency">
-      <mat-option></mat-option>
-      <mat-option [value]="option" *ngFor="let option of supportedCurrencies">{{
-        option
-      }}</mat-option>
-    </mat-select>
-  </mat-form-field>
   <mat-form-field *ngIf="options" class="example-full-width" class="form-field">
     <mat-label id="selectCoin">Select Coin</mat-label>
     <input
@@ -30,12 +23,21 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+  <mat-form-field *ngIf="supportedCurrencies" class="form-field">
+    <mat-label>Currency</mat-label>
+    <mat-select value="USD" [formControl]="selectedCurrency">
+      <mat-option></mat-option>
+      <mat-option [value]="option" *ngFor="let option of supportedCurrencies">{{
+        option
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
   <mat-form-field class="example-full-width" class="form-field">
     <mat-label>Number of days ago</mat-label>
     <input matInput [formControl]="selectedDays" />
   </mat-form-field>
   <div style="display: block">
-    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button mat-raised-button color="primary" type="submit">{{buttonText}}</button>
   </div>
 </form>
 <div *ngIf="chartOption">
@@ -43,3 +45,5 @@
   <div echarts [options]="chartOption" class="demo-chart"></div>
   <!-- </div> -->
 </div>
+</mat-card>
+

@@ -16,6 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 
@@ -40,6 +42,8 @@ import { CompareComponent } from './compare/compare.component';
     MatButtonModule,
     MatBadgeModule,
     MatToolbarModule,
+    MatIconModule,
+    MatTooltipModule,
     NgxEchartsModule.forRoot({
       /**
        * This will import all modules from echarts.
